@@ -1,0 +1,32 @@
+# Code:
+
+close all 
+clear all 
+clc 
+s = tf('s'); 
+  
+Go = (1.151*s+0.1774)/(s^3+0.739*s^2+0.921*s) 
+step(0.2*Go,10)        % step input = 0.2 rad/sec, for 10 sec 
+title ('Step Response for Open Loop') 
+grid on 
+figure 
+  
+%%for Open Loop 
+rlocus(Go);    %pole at origin, system = unstable/marginally stable(type 1 TF) 
+title('Root Locus for Open Loop') 
+figure 
+  
+%for Close Loop 
+Gc = feedback(Go,1); 
+r = pole(Gc);            % to find the pole  
+rlocus(Gc);              % pole away from origin, sysyem =  stable 
+title('Root Locus For Close Loop') 
+figure 
+ 
+%%Bode plot for Open Loop 
+bode(Go) 
+title('BODE PLOT for Open Loop System') 
+ 
+%%Bode plot for Close Loop 
+bode(Gc) 
+title('BODE PLOT for Close Loop System')
